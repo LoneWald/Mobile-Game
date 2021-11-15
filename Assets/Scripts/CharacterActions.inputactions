@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "CharacterActions",
     "maps": [
         {
             "name": "PlayerActions",
@@ -103,7 +103,18 @@
                 {
                     "name": "",
                     "id": "d20ef1f9-7d3b-4b79-8af4-8b6731e1f4de",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "689ad5c7-5b19-4091-8d6d-46fbf97a3088",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
