@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health;
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = true;
         agent.updateUpAxis = false;
     }
 
@@ -19,12 +20,8 @@ public class Enemy : MonoBehaviour
     {
         if(health <= 0)
             GameObject.Destroy(gameObject);
-
-        agent.SetDestination(target.position);
-
-        
+        agent.SetDestination(target.position);   
     }
-
     public void ChangeHealth(int value)
     {
         health += value;
