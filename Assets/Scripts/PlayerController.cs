@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private CharacterActions playerInput;
     private float moveAngle;
     private Animator anim;
+    private Vector3 mousePos;
     
     private void Awake()
     {
@@ -41,14 +42,18 @@ public class PlayerController : MonoBehaviour
         //------ Движение ------//
         Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
         moveVelocity = moveInput.normalized * speed;    // Вектор движения
-        Vector3 mousePosWorld = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 mousePos = new Vector3(mousePosWorld.x, mousePosWorld.y, 0);
+
         /*if (playerInput.PlayerActions.Move.triggered)   // Направление
             moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0), new Vector3(moveVelocity.x, moveVelocity.y, 0), Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));*/
+        
+        Vector3 mousePosWorld = cam.ScreenToWorldPoint(Input.mousePosition);    // Поворот
+        mousePos = new Vector3(mousePosWorld.x, mousePosWorld.y, 0);
+        
         moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0), 
                     (mousePos - new Vector3(rb.position.x, rb.position.y, 0)).normalized, 
                     Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
                     Debug.Log((mousePos - new Vector3(rb.position.x, rb.position.y, 0)).normalized);
+
         if (moveInput != Vector2.zero)                  // Анимация движения
             anim.SetBool("isRunning", true);
         else
@@ -66,11 +71,16 @@ public class PlayerController : MonoBehaviour
         else
             timeBtwAttack -= Time.deltaTime;
 
+        Debug.Log(moveAngle);
+
     }
     private void FixedUpdate()
     {
+        if((new Vector2(mousePos.x, mousePos.y) - rb.position).magnitude > 0.1f){
+            rb.MoveRotation(moveAngle);
+        }
         rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-        rb.MoveRotation(moveAngle);
+        
     }
 
     public void ChangeHealth(int value)
