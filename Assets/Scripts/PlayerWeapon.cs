@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class PlayerWeapon : MonoBehaviour
 {
-    [SerializeField] private string name;
     [SerializeField] private int damage = 50;
     [SerializeField] private float attackRange;
     [SerializeField] private Transform attackPos;
@@ -12,13 +11,16 @@ public class Weapon : MonoBehaviour
 
     public void Attack() // атакует врагов в радиусе круга attackPos
     {
+        //---- For player
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemyLayer);
         for (int i = 0; i < enemies.Length; i++)
         {
             enemies[i].GetComponent<Enemy>().ChangeHealth(-damage);
         }
+
     }
 
+    // Для наглядности
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);

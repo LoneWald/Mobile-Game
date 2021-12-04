@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private int health = 100;
-    [SerializeField] private int damage = 50;
     [SerializeField] private float startTimeBtwAttack = 0.5f;
     [SerializeField] private GameObject currentWeapon;
     private Camera cam;
@@ -39,6 +38,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (health <= 0)
+            GameObject.Destroy(gameObject);
+
         //------ Движение ------//
         Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
         moveVelocity = moveInput.normalized * speed;    // Вектор движения
@@ -52,7 +54,6 @@ public class PlayerController : MonoBehaviour
         moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0), 
                     (mousePos - new Vector3(rb.position.x, rb.position.y, 0)).normalized, 
                     Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
-                    Debug.Log((mousePos - new Vector3(rb.position.x, rb.position.y, 0)).normalized);
 
         if (moveInput != Vector2.zero)                  // Анимация движения
             anim.SetBool("isRunning", true);
@@ -71,8 +72,6 @@ public class PlayerController : MonoBehaviour
         else
             timeBtwAttack -= Time.deltaTime;
 
-        Debug.Log(moveAngle);
-
     }
     private void FixedUpdate()
     {
@@ -88,9 +87,10 @@ public class PlayerController : MonoBehaviour
         health += value;
     }
 
+    //---- Выставляется в конце анимации
     public void DoActtack()
     {
-        currentWeapon.GetComponent<Weapon>().Attack();
+        currentWeapon.GetComponent<PlayerWeapon>().Attack();
     }
 
 
