@@ -14,12 +14,11 @@ public class PlayerLegsAnimationController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A)
-            || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             _animator.SetBool(RUN, true);
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             _animator.SetBool(RUN, false);
         }

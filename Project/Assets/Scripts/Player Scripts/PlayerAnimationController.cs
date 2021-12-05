@@ -7,7 +7,15 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    private const string RUN = "Run";
+    private const string STATE = "State";
+    private const int Default = 0;
+    private const int Run = 1;
+    private const int Attack_One = 2;
+    private const int Block_Back = 3;
+    private const int Block_Front = 4;
+    private const int Dash = 5;
+    private const int Killed_Back = 6;
+    private const int Killed_Front = 7;
 
     Animator _animator;
     void Start()
@@ -17,14 +25,17 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A)
-            || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            _animator.SetBool(RUN, true);
+            _animator.SetInteger(STATE, Run);
         }
-        else
+        else if(Input.GetKeyDown(KeyCode.S))
         {
-            _animator.SetBool(RUN, false);
+            _animator.SetInteger(STATE, Default);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _animator.SetInteger(STATE, Dash);
         }
     }
 }

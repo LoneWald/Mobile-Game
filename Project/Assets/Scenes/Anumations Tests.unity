@@ -206,23 +206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1874920382 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1874920382, guid: 6737cd9b2a3236540903455bd4a5776b, type: 3}
-  m_PrefabInstance: {fileID: 6488851005585551857}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1874920386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874920382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed41a6ee73202454e8fba0216718d01b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6488851005585551857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230,10 +213,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1874920385, guid: 6737cd9b2a3236540903455bd4a5776b, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6488851005112247744, guid: 6737cd9b2a3236540903455bd4a5776b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -280,14 +259,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488851005112247746, guid: 6737cd9b2a3236540903455bd4a5776b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6488851005112247747, guid: 6737cd9b2a3236540903455bd4a5776b, type: 3}
-      propertyPath: m_Size.y
-      value: 0.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 6488851005112247747, guid: 6737cd9b2a3236540903455bd4a5776b, type: 3}
-      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
