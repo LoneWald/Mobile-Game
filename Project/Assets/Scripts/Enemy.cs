@@ -11,11 +11,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject currentWeapon;
     private float timeBtwAttack;
     private const int MAX_HEALTH = 100;
-    public Transform target;
+    public Transform playerTarget;
+    private Transform target;
     private Rigidbody2D rb;
     private NavMeshAgent agent;
     private Animator anim;
-    
+    private WayPointsSystem way;
+    public bool isAgro = false;
+
+
 
     private float moveAngle;
     [SerializeField] private int health;
@@ -27,12 +31,36 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         rb = GetComponent<Rigidbody2D>();
+        way = GetComponent<WayPointsSystem>();
     }
 
     void Update()
     {
+        if (!isAgro)
+        {
+            target = way.GetWayPoint().transform;
+        }
+        else
+        {
+            target = playerTarget;
+
+            //---- Attack ----
+            if (timeBtwAttack <= 0)         // Перезарядка атаки
+            {
+                if ((target.position - new Vector3(rb.position.x, rb.position.y, 0)).magnitude < attaclRadius)
+                {
+                    anim.SetTrigger("Attack");
+                    timeBtwAttack = startTimeBtwAttack;
+                }
+            }
+            else
+                timeBtwAttack -= Time.deltaTime;
+        }
         if (health <= 0)
-            GameObject.Destroy(gameObject);
+        {
+            Dead();
+        }
+
         agent.SetDestination(target.position);
         rb.AddTorque(10 * Time.deltaTime);
 
@@ -43,17 +71,6 @@ public class Enemy : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, 0, moveAngle);
 
 
-        //---- Attack ----
-        if (timeBtwAttack <= 0)         // Перезарядка атаки
-        {
-            if ((target.position - new Vector3(rb.position.x, rb.position.y, 0)).magnitude < attaclRadius)
-            {
-                anim.SetTrigger("Attack");
-                timeBtwAttack = startTimeBtwAttack;
-            }
-        }
-        else
-            timeBtwAttack -= Time.deltaTime;
     }
     public void ChangeHealth(int value)
     {
@@ -64,5 +81,18 @@ public class Enemy : MonoBehaviour
     public void DoActtack()
     {
         currentWeapon.GetComponent<EnemyWeapon>().Attack();
+    }
+
+    public void Dead()
+    {
+        this.transform.Find("EnemyModel").gameObject.SetActive(false);
+        this.transform.Find("DeadModel").gameObject.SetActive(true);
+        this.GetComponent<CapsuleCollider2D>().enabled = false;
+        this.GetComponent<NavMeshAgent>().enabled = false;
+        this.enabled = false;
+    }
+
+    public void SetAgro(bool agro){
+        isAgro = agro;
     }
 }
