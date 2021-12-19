@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2418426002909021494
 Transform:
   m_ObjectHideFlags: 0
@@ -158,12 +158,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2418426002909021498}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0.893, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 636330535622155293}
   - {fileID: 2418426003058812516}
+  - {fileID: 636330535622155293}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,7 +221,8 @@ MonoBehaviour:
   currentWeapon: {fileID: 2418426001264490488}
   playerTarget: {fileID: 0}
   isAgro: 0
-  health: 100
+  health: 1
+  stayToThink: 2
 --- !u!195 &2418426002909021495
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -256,10 +257,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134e486c4ddfab642aca1217c8daff34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WayPoints: []
+  WayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   num: 0
-  speed: 0
-  minDist: 0
+  speed: 3
+  minDist: 0.03
   rand: 0
   go: 1
 --- !u!95 &2418426002909021492
@@ -293,6 +299,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bd85173a856ff4fb6dfbeced9fe8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 5
+  viewAngle: 30
+  target: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 2049
 --- !u!1 &2418426003017163725
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +366,7 @@ Transform:
   - {fileID: 2418426003017163722}
   - {fileID: 2418426001264490489}
   m_Father: {fileID: 2418426002909021494}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2418426003058812517
 SpriteRenderer:
@@ -404,7 +416,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &9176719533068442579
@@ -436,7 +448,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2418426002909021494}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &182206808348309472
 SpriteRenderer:

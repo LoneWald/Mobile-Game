@@ -1557,7 +1557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &723377424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2638,7 +2638,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &1352416535454395666
@@ -2654,7 +2654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2094445533739927381, guid: 2c99896b5bbbbbb4e9b3798139c39987, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2785048258927412437, guid: 2c99896b5bbbbbb4e9b3798139c39987, type: 3}
       propertyPath: health
@@ -2702,7 +2702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5741062404666701948, guid: 2c99896b5bbbbbb4e9b3798139c39987, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 5741062404666701948, guid: 2c99896b5bbbbbb4e9b3798139c39987, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2892,7 +2892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2418426002909021498, guid: 85bf9cf94219b3f4491718c9abb0762a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2418426002909021499, guid: 85bf9cf94219b3f4491718c9abb0762a, type: 3}
       propertyPath: health
