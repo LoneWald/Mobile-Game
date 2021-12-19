@@ -77,7 +77,6 @@ public class Enemy : MonoBehaviour
         }
 
         agent.SetDestination(target.position);
-        rb.AddTorque(10 * Time.deltaTime);
     }
 
     private void Rotate(){
@@ -96,10 +95,11 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        this.transform.Find("EnemyModel").gameObject.SetActive(false);
         this.transform.Find("DeadModel").gameObject.SetActive(true);
+        //this.transform.Find("EnemyModel").gameObject.SetActive(false);
         this.GetComponent<CapsuleCollider2D>().enabled = false;
         this.GetComponent<NavMeshAgent>().enabled = false;
+        this.GetComponent<SpriteRenderer>().enabled = false;
         this.enabled = false;
     }
 

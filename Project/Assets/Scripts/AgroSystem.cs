@@ -28,7 +28,7 @@ public class AgroSystem : MonoBehaviour
         }
 
         // Debug.Log(Vector2.Angle(transform.TransformDirection(new Vector2(0f, 1f)), vectorBetween));
-        // Debug.DrawRay(transform.position, new Vector2(0f, 1f) * 5f, Color.red);
+        Debug.DrawRay(transform.position, new Vector2(0f, 1f) * 5f, Color.red);
         // Debug.Log(hit.collider.name);
     }
 }
