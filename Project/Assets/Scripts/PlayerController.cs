@@ -55,22 +55,22 @@ public class PlayerController : MonoBehaviour
                     (mousePos - new Vector3(rb.position.x, rb.position.y, 0)).normalized, 
                     Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
 
-        if (moveInput != Vector2.zero)                  // Анимация движения
-            anim.SetBool("isRunning", true);
-        else
-            anim.SetBool("isRunning", false);
+        // if (moveInput != Vector2.zero)                  // Анимация движения
+        //     anim.SetBool("isRunning", true);
+        // else
+        //     anim.SetBool("isRunning", false);
 
         //------ Атака -------//
-        if (timeBtwAttack <= 0)         // Перезарядка атаки
-        {
-            if (playerInput.PlayerActions.Attack.IsPressed())
-            {
-                anim.SetTrigger("Attack_2");
-                timeBtwAttack = startTimeBtwAttack;
-            }
-        }
-        else
-            timeBtwAttack -= Time.deltaTime;
+        // if (timeBtwAttack <= 0)         // Перезарядка атаки
+        // {
+        //     if (playerInput.PlayerActions.Attack.IsPressed())
+        //     {
+        //         anim.SetTrigger("Attack_2");
+        //         timeBtwAttack = startTimeBtwAttack;
+        //     }
+        // }
+        // else
+        //     timeBtwAttack -= Time.deltaTime;
 
     }
     private void FixedUpdate()

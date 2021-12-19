@@ -4,39 +4,31 @@ using UnityEngine;
 
 public class AgroSystem : MonoBehaviour
 {
+    public float maxDistance = 5f;
+    public float viewAngle = 30;
     private RaycastHit[] hits;
-    public Collider2D player;
-    private Enemy agroScript;
+    public Transform target;
+    private Enemy enemyScript;
      public LayerMask mask;
+     private float moveAngle;
     void Start()
     {
-        agroScript = gameObject.GetComponent<Enemy>();
+        enemyScript = gameObject.GetComponent<Enemy>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        DrawRays();
-        RaycastHit2D[] hits = {new RaycastHit2D(), new RaycastHit2D(), new RaycastHit2D(), new RaycastHit2D(), new RaycastHit2D(), new RaycastHit2D(), new RaycastHit2D()};
-        for (int i = 0; i < 7; i++){
-            hits[i] = Physics2D.Raycast(transform.position, transform.TransformDirection(new Vector2((i-3)*0.1f, 1f)), 5f,  mask);
-        }
-        foreach(RaycastHit2D hit in hits){
-            Debug.Log(hit.collider.name);
-            if(hit.collider == player){
-                agroScript.SetAgro(true);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.position - transform.position, (target.position - transform.position).magnitude - 0.3f, mask);
+        Vector2 vectorBetween = target.position - transform.position;
+        if (Vector2.Angle(transform.TransformDirection(Vector2.up), vectorBetween) < viewAngle && vectorBetween.magnitude < maxDistance)
+        {
+            if(hit.collider == null){
+                enemyScript.SetAgro(true);
             }
+            Debug.DrawRay(transform.position, target.position - transform.position, Color.green);
         }
-    }
 
-    public void DrawRays()
-{
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(-0.3f, 1f)) * 5f, Color.red);
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(-0.2f, 1f)) * 5f, Color.red);
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(-0.1f, 1f)) * 5f, Color.red);
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(0f, 1f)) * 5f, Color.red);
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(0.1f, 1f)).normalized * 5f, Color.red);
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(0.2f, 1f)).normalized * 5f, Color.red);
-    Debug.DrawRay(transform.position, transform.TransformDirection(new Vector2(0.3f, 1f)).normalized * 5f, Color.red);
-}
+        // Debug.Log(Vector2.Angle(transform.TransformDirection(new Vector2(0f, 1f)), vectorBetween));
+        // Debug.DrawRay(transform.position, new Vector2(0f, 1f) * 5f, Color.red);
+        // Debug.Log(hit.collider.name);
+    }
 }

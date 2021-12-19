@@ -53,6 +53,15 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FrontBlock"",
+                    ""type"": ""Button"",
+                    ""id"": ""f58eb129-05dc-4510-8b8e-c36854b351e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
                     ""action"": ""JumpForward"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3515e5f4-86fc-4050-837e-606bf8d792ed"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FrontBlock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f0f976b-a42d-422c-a634-98fd0d927609"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FrontBlock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +207,7 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
         m_PlayerActions_Move = m_PlayerActions.FindAction("Move", throwIfNotFound: true);
         m_PlayerActions_Attack = m_PlayerActions.FindAction("Attack", throwIfNotFound: true);
         m_PlayerActions_JumpForward = m_PlayerActions.FindAction("JumpForward", throwIfNotFound: true);
+        m_PlayerActions_FrontBlock = m_PlayerActions.FindAction("FrontBlock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,6 +270,7 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Move;
     private readonly InputAction m_PlayerActions_Attack;
     private readonly InputAction m_PlayerActions_JumpForward;
+    private readonly InputAction m_PlayerActions_FrontBlock;
     public struct PlayerActionsActions
     {
         private @CharacterActions m_Wrapper;
@@ -245,6 +278,7 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerActions_Move;
         public InputAction @Attack => m_Wrapper.m_PlayerActions_Attack;
         public InputAction @JumpForward => m_Wrapper.m_PlayerActions_JumpForward;
+        public InputAction @FrontBlock => m_Wrapper.m_PlayerActions_FrontBlock;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +297,9 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
                 @JumpForward.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJumpForward;
                 @JumpForward.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJumpForward;
                 @JumpForward.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJumpForward;
+                @FrontBlock.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFrontBlock;
+                @FrontBlock.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFrontBlock;
+                @FrontBlock.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFrontBlock;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -276,6 +313,9 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
                 @JumpForward.started += instance.OnJumpForward;
                 @JumpForward.performed += instance.OnJumpForward;
                 @JumpForward.canceled += instance.OnJumpForward;
+                @FrontBlock.started += instance.OnFrontBlock;
+                @FrontBlock.performed += instance.OnFrontBlock;
+                @FrontBlock.canceled += instance.OnFrontBlock;
             }
         }
     }
@@ -285,5 +325,6 @@ public partial class @CharacterActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnJumpForward(InputAction.CallbackContext context);
+        void OnFrontBlock(InputAction.CallbackContext context);
     }
 }
