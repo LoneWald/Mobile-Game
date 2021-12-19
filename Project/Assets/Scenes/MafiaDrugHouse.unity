@@ -301,6 +301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1394225916791672981, guid: 2bf818e270b295e4bb2211e55b437eff, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2346535529124872243, guid: 2bf818e270b295e4bb2211e55b437eff, type: 3}
       propertyPath: m_Name
       value: Corridor
@@ -535,11 +539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700537939419922605, guid: cd250ace4de101e47b4f3e821cfa7831, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.43
+      value: -3.54
       objectReference: {fileID: 0}
     - target: {fileID: 1700537939419922605, guid: cd250ace4de101e47b4f3e821cfa7831, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.87
+      value: -1.27
       objectReference: {fileID: 0}
     - target: {fileID: 1700537939419922605, guid: cd250ace4de101e47b4f3e821cfa7831, type: 3}
       propertyPath: m_LocalPosition.z
