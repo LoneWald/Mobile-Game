@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class WayPointsSystem : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class WayPointsSystem : MonoBehaviour
     public bool go = true;
     private Rigidbody2D rb;
     private float moveAngle;
+    private Enemy en;
 
     private void Start() {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        en = GetComponent<Enemy>();
     }
 
     void Update()
@@ -25,7 +28,7 @@ public class WayPointsSystem : MonoBehaviour
         {
             if (dist < minDist)
             {
-                
+                en.SetArrived(true);
                 if (!rand)
                 {
                     if (num + 1 == WayPoints.Length)
@@ -48,5 +51,6 @@ public class WayPointsSystem : MonoBehaviour
     public GameObject GetWayPoint(){
         return WayPoints[num];
     }
+    
 }
 

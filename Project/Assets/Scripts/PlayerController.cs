@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
             GameObject.Destroy(gameObject);
 
         //------ Движение ------//
-        // Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
-        // moveVelocity = moveInput.normalized * speed;    // Вектор движения
+        Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
+        moveVelocity = moveInput.normalized * speed;    // Вектор движения
 
         /*if (playerInput.PlayerActions.Move.triggered)   // Направление
             moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0), new Vector3(moveVelocity.x, moveVelocity.y, 0), Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));*/
