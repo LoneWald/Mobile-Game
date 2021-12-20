@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private WayPointsSystem way;
+    private WeaponScript weapon;
     public bool isAgro = false;
     private bool isArrived = false;
     private bool isCoroutineProceed = false;
@@ -24,6 +25,9 @@ public class Enemy : MonoBehaviour
     private float moveAngle;
     [SerializeField] private int health;
     public float stayToThink = 2f;
+    
+    private float minDistPoint = 0.01f;
+    public float minDistToPlayer = 2f;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -33,38 +37,43 @@ public class Enemy : MonoBehaviour
         agent.updateUpAxis = false;
         rb = GetComponent<Rigidbody2D>();
         way = GetComponent<WayPointsSystem>();
+        weapon = GetComponentsInChildren<WeaponScript>()[0];
+        playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
         if (!isAgro)
         {
-            if(isArrived){
-                if(!isCoroutineProceed){
-                StartCoroutine(wait());
+            if (isArrived)
+            {
+                if (!isCoroutineProceed)
+                {
+                    StartCoroutine(wait());
                 }
             }
             else
-            target = way.GetWayPoint().transform;
+                target = way.GetWayPoint().transform;
         }
         else
         {
             target = playerTarget;
-
-            //---- Attack ----
-            if (timeBtwAttack <= 0)         // Перезарядка атаки
-            {
-                if ((target.position - new Vector3(rb.position.x, rb.position.y, 0)).magnitude < attaclRadius)
-                {
-                    anim.SetTrigger("Attack");
-                    timeBtwAttack = startTimeBtwAttack;
-                }
-            }
-            else
-                timeBtwAttack -= Time.deltaTime;
+            weapon.Shoot();
+            // //---- Attack ----
+            // if (timeBtwAttack <= 0)         // Перезарядка атаки
+            // {
+            //     if ((target.position - new Vector3(rb.position.x, rb.position.y, 0)).magnitude < attaclRadius)
+            //     {
+            //         anim.SetTrigger("Attack");
+            //         timeBtwAttack = startTimeBtwAttack;
+            //     }
+            // }
+            // else
+            //     timeBtwAttack -= Time.deltaTime;
         }
-        
-        if(isGo){
+
+        if (isGo)
+        {
             moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0),
                     (target.position - new Vector3(rb.position.x, rb.position.y, 0)).normalized,
                     Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
@@ -79,7 +88,8 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(target.position);
     }
 
-    private void Rotate(){
+    private void Rotate()
+    {
         transform.localEulerAngles = new Vector3(0, 0, moveAngle);
     }
     public void ChangeHealth(int value)
@@ -103,15 +113,18 @@ public class Enemy : MonoBehaviour
         this.enabled = false;
     }
 
-    public void SetAgro(bool agro){
+    public void SetAgro(bool agro)
+    {
         isAgro = agro;
     }
 
-    public void SetArrived(bool arrive){
+    public void SetArrived(bool arrive)
+    {
         isArrived = arrive;
     }
 
-    IEnumerator wait(){
+    IEnumerator wait()
+    {
         isGo = false;
         isCoroutineProceed = true;
         yield return new WaitForSeconds(stayToThink);

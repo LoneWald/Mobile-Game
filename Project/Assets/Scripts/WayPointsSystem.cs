@@ -8,7 +8,7 @@ public class WayPointsSystem : MonoBehaviour
     public GameObject[] WayPoints;
     public int num = 0;
     public float speed;
-    public float minDist;
+    private float minDist = 0.01f;
     public bool rand = false;
     public bool go = true;
     private Rigidbody2D rb;
@@ -51,6 +51,5 @@ public class WayPointsSystem : MonoBehaviour
     public GameObject GetWayPoint(){
         return WayPoints[num];
     }
-    
 }
 

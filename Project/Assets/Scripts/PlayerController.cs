@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float moveAngle;
     private Animator anim;
     private Vector3 mousePos;
+    private AudioSource sworsAudio;
     
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         timeBtwAttack = startTimeBtwAttack;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sworsAudio = GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (health <= 0)
-            GameObject.Destroy(gameObject);
+            Dead();
 
         //------ Движение ------//
         Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
@@ -92,73 +94,23 @@ public class PlayerController : MonoBehaviour
     {
         currentWeapon.GetComponent<PlayerWeapon>().Attack();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    private Player playerInput;
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    [SerializeField]
-    private float playerSpeed = 2.0f;
-    [SerializeField]
-    private float jumpHeight = 1.0f;
-    [SerializeField]
-    private float gravityValue = -9.81f;
-
-
-    private void Awake()
-    {
-        playerInput = new Player();
-        controller = GetComponent<CharacterController>();
+    public void PlayAudio(){
+        sworsAudio.Play();
     }
-
-    private void OnEnable()
+    public void Dead()
     {
-        playerInput.Enable();
-    }
-    private void OnDisable()
-    {
-        playerInput.Disable();
-    }
-
-
-    void Update()
-    {
-
-        Vector2 movementInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
-        Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.up = move;
+        //this.transform.Find("DeadModel").gameObject.SetActive(true);
+        for(int i = 0; i < this.transform.childCount; i++){
+            GameObject child = this.transform.GetChild(i).gameObject;
+            child.SetActive(!child.activeSelf);
         }
-
-        // Changes the height position of the player..
-        if (playerInput.PlayerActions.JumpForward.triggered)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
-        controller.Move(playerVelocity * Time.deltaTime);
+        rb.simulated = false;
+        this.GetComponent<CapsuleCollider2D>().enabled = false;
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        this.GetComponent<PlayerAnimationsChanger>().enabled = false;
+        sworsAudio.enabled = false;
+        anim.enabled = false;
+        this.enabled = false;
     }
 
-*/
 }

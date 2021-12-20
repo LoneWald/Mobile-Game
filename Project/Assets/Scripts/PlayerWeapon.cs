@@ -8,7 +8,6 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private Transform attackPos;
     [SerializeField] private LayerMask enemyLayer;
-
     public void Attack() // атакует врагов в радиусе круга attackPos
     {
         //---- For player
@@ -17,7 +16,6 @@ public class PlayerWeapon : MonoBehaviour
         {
             enemies[i].GetComponent<Enemy>().ChangeHealth(-damage);
         }
-
     }
 
     // Для наглядности

@@ -19,11 +19,14 @@ public class EnemyWeapon : MonoBehaviour
         }
 
     }
+    
 
     // Для наглядности
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
+
+
 
 }
