@@ -1,0 +1,104 @@
+<dialogue>
+  <node id="0">
+    <npctext>Привет, поможешь старику? Надо бы убить тех перцев. Они меня конкретно задолбали. Принеси 10 пистолетов как доказательство</npctext>
+    <answers>
+      <answer tonode="1">
+        <text>Ок, дед</text>
+        <quest>1</quest>
+      </answer>
+      <answer tonode="2">
+        <text>Не, мне в лом</text>
+        <quest>2</quest>
+      </answer>
+      <answer tonode="3">
+        <text>Потом поговорим</text>
+        <exit>true</exit>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="1">
+    <npctext>Пасиба, буду благодарен</npctext>
+    <answers>
+      <answer tonode="5">
+        <text>Угу</text>
+        <exit>true</exit>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="2">
+    <npctext>Мудила, ну и катись отсюда</npctext>
+    <answers>
+      <answer tonode="3">
+        <text>Сам пошел</text>
+        <exit>true</exit>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="3">
+    <npctext>Ну что, может поможешь?</npctext>
+    <answers>
+      <answer tonode="1">
+        <text>Ок, дед</text>
+        <quest>1</quest>
+      </answer>
+      <answer tonode="4">
+        <text>А че ты там просил?</text>
+      </answer>
+      <answer tonode="2">
+        <text>Не, мне в лом</text>
+        <quest>2</quest>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="4">
+    <npctext>Пришибить тех уродов и притащить их пушки</npctext>
+    <answers>
+      <answer tonode="1">
+        <text>Ок, дед</text>
+        <quest>1</quest>
+      </answer>
+      <answer tonode="2">
+        <text>Не, мне очень в лом</text>
+        <quest>2</quest>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="5">
+    <npctext>Притащил?</npctext>
+    <answers>
+      <answer tonode="6">
+        <text>На, держи</text>
+        <questEnd>1</questEnd>
+      </answer>
+      <answer tonode="5">
+        <text>Еще нет</text>
+        <exit>true</exit>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="6">
+    <npctext>Реально спс. Оставь их себе, мне они нахрен не сдались. Но за доброе дело спасибо</npctext>
+    <answers>
+      <answer tonode="7">
+        <text>Пакедова</text>
+        <exit>true</exit>
+      </answer>
+    </answers>
+  </node>
+
+  <node id="7">
+    <npctext>Ну и помог ты мне, во век помнить буду, мб пельменей притащу потом</npctext>
+    <answers>
+      <answer tonode="7">
+        <text>Было бы неплохо</text>
+        <exit>true</exit>
+      </answer>
+    </answers>
+  </node>
+</dialogue>

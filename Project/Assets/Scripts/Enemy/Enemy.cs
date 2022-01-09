@@ -53,7 +53,12 @@ public class Enemy : MonoBehaviour
                 }
             }
             else
-                target = way.GetWayPoint().transform;
+            {
+                if (way.GetWayPoint() != null)
+                    target = way.GetWayPoint().transform;
+                else
+                    target = null;
+            }
         }
         else
         {
@@ -71,21 +76,22 @@ public class Enemy : MonoBehaviour
             // else
             //     timeBtwAttack -= Time.deltaTime;
         }
-
-        if (isGo)
+        if (target != null)
         {
-            moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0),
-                    (target.position - new Vector3(rb.position.x, rb.position.y, 0)).normalized,
-                    Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
+            if (isGo)
+            {
+                moveAngle = Vector3.SignedAngle(new Vector3(0, 1, 0),
+                        (target.position - new Vector3(rb.position.x, rb.position.y, 0)).normalized,
+                        Vector3.Cross(new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
+            }
+            Rotate();
+            agent.SetDestination(target.position);
         }
-        Rotate();
 
         if (health <= 0)
         {
             Dead();
         }
-
-        agent.SetDestination(target.position);
     }
 
     private void Rotate()

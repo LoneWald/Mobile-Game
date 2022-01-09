@@ -9,22 +9,24 @@ public class PlayerAnimationsChanger : MonoBehaviour
     [SerializeField] private float startTimeBtwBlock = 0.5f;
     private float timeBtwAttack;
     private float timeBtwBlock;
-    private CharacterActions playerInput;
+    private InputActions input;
     private Animator anim;
     public Animator secondAnim;
     private bool isAttackTwoEnable;
     private bool isAction;
+    private bool isInventory = false;
+    private bool isStopped = false;
     private void Awake()
     {
-        playerInput = new CharacterActions();
+        input = new InputActions();
     }
     private void OnEnable()
     {
-        playerInput.Enable();
+        input.Enable();
     }
     private void OnDisable()
     {
-        playerInput.Disable();
+        input.Disable();
     }
     void Start()
     {
@@ -34,19 +36,30 @@ public class PlayerAnimationsChanger : MonoBehaviour
     }
     void Update()
     {
-        RunLegs();
-
-        if (!isAction)
+        if (input.UIInput.Inventory.triggered)
         {
-            Run();
-            Attack();
-            FrontBlock();
+            isInventory = !isInventory;
+        }
+        if (!isStopped)
+        {
+
+            RunLegs();
+
+            if (!isAction)
+            {
+                Run();
+                if (!isInventory)
+                {
+                    Attack();
+                    FrontBlock();
+                }
+            }
         }
     }
 
     private void RunLegs()
     {
-        Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
+        Vector2 moveInput = input.PlayerActions.Move.ReadValue<Vector2>();
         if (moveInput != Vector2.zero)
         {
             secondAnim.SetInteger("State", 1);
@@ -59,7 +72,7 @@ public class PlayerAnimationsChanger : MonoBehaviour
     private void Attack()
     {
         timeBtwAttack -= Time.deltaTime;
-        if (playerInput.PlayerActions.Attack.IsPressed())
+        if (input.PlayerActions.Attack.IsPressed())
         {
             if (timeBtwAttack <= 0)
             {
@@ -96,7 +109,7 @@ public class PlayerAnimationsChanger : MonoBehaviour
     {
         if (timeBtwBlock <= 0)
         {
-            if (playerInput.PlayerActions.FrontBlock.IsPressed())
+            if (input.PlayerActions.FrontBlock.IsPressed())
             {
                 isAction = true;
                 anim.SetInteger("State", 4);
@@ -109,7 +122,7 @@ public class PlayerAnimationsChanger : MonoBehaviour
 
     private void Run()
     {
-        Vector2 moveInput = playerInput.PlayerActions.Move.ReadValue<Vector2>();
+        Vector2 moveInput = input.PlayerActions.Move.ReadValue<Vector2>();
         if (moveInput != Vector2.zero)
         {
             anim.SetInteger("State", 1);
@@ -122,5 +135,17 @@ public class PlayerAnimationsChanger : MonoBehaviour
     public void EndAction()
     {
         isAction = false;
+    }
+
+    public void DisableAnimations()
+    {
+        isStopped = !isStopped;
+        secondAnim.SetInteger("State", 0);
+        anim.SetInteger("State", 0);
+    }
+
+    public void EnableAnimations()
+    {
+        isStopped = !isStopped;
     }
 }

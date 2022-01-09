@@ -23,7 +23,7 @@ public class AgroSystem : MonoBehaviour
     }
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.position - transform.position, (target.position - transform.position).magnitude - 0.3f, mask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.position - transform.position, (target.position - transform.position).magnitude - 0.1f, mask);
         Vector2 vectorBetween = target.position - transform.position;
         if (Vector2.Angle(transform.TransformDirection(Vector2.up), vectorBetween) < viewAngle && vectorBetween.magnitude < maxDistance)
         {

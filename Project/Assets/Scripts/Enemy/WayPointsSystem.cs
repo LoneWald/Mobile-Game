@@ -22,34 +22,41 @@ public class WayPointsSystem : MonoBehaviour
 
     void Update()
     {
-        float dist = Vector2.Distance(gameObject.transform.position, WayPoints[num].transform.position);
-
-        if (go)
+        if (WayPoints.Length > 0)
         {
-            if (dist < minDist)
+            float dist = Vector2.Distance(gameObject.transform.position, WayPoints[num].transform.position);
+
+            if (go)
             {
-                en.SetArrived(true);
-                if (!rand)
+                if (dist < minDist)
                 {
-                    if (num + 1 == WayPoints.Length)
+                    en.SetArrived(true);
+                    if (!rand)
                     {
-                        num = 0;
+                        if (num + 1 == WayPoints.Length)
+                        {
+                            num = 0;
+                        }
+                        else
+                        {
+                            num++;
+                        }
                     }
                     else
                     {
-                        num++;
+                        num = Random.Range(0, WayPoints.Length);
                     }
-                }
-                else
-                {
-                    num = Random.Range(0, WayPoints.Length);
                 }
             }
         }
     }
 
-    public GameObject GetWayPoint(){
-        return WayPoints[num];
+    public GameObject GetWayPoint()
+    {
+        if (WayPoints.Length > 0)
+            return WayPoints[num];
+        else
+            return null;
     }
 }
 
